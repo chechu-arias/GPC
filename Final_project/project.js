@@ -1,20 +1,21 @@
+/*
+ * Author: Chechu Arias Moncho
+ * Final project of Computer Vision Graphics
+ */
+
 let renderer, scene, camera;
 
-// Monitor
 let stats;
 
-// GUI
 let effectController;
 
 let keyboard;
 let movement_dist = 10;
 
+let dart;
 let diana;
 
-let dart;
-
 let dartboard_light;
-
 let dartboard_camera;
 
 let dart_thrown = false;
@@ -70,8 +71,6 @@ function init() {
     // Display de las estadísticas (monitor)
     stats = new Stats();
     stats.showPanel(1);
-    //document.body.appendChild( stats.domElement );
-
 
     renderer.domElement.onclick = () =>
     renderer.domElement.requestPointerLock()
@@ -113,9 +112,6 @@ function init() {
     renderer.shadowMap.enabled = true;
     renderer.antialias = true;
 
-    //renderer.gammaOutput = true;
-    //renderer.gammaFactor = 1.5;
-
     // Ilumination
 
     let luzAmbiente = new THREE.AmbientLight( 0xffffff, 0.4 );
@@ -152,27 +148,14 @@ function setupGUI() {
         mensaje: 'Interfaz del Robot',
         player_speed: movement_speed,
         dart_speed: throwing_speed,
-        dart_color: "rgb(255, 0, 0)"/*,
-        giro_brazo_z: 0,
-        giro_antebrazo_y: 0,
-        giro_antebrazo_z: 0,
-        giro_pinza_z: 0,
-        distancia_pinza_z: 15,
-        colorMaterial: "rgb(255, 0, 0)"*/
+        dart_color: "rgb(255, 0, 0)"
     };
 
-    let gui = new dat.GUI();
+    let gui = new dat.GUI( { width: 350 } );
     let carpeta = gui.addFolder("Control del Robot");
 
     carpeta.add(effectController, "player_speed", 0.2, 4.0, 0.1).name("Velocidad del movimiento");
-    carpeta.add(effectController, "dart_speed", 25, 40, 1).name("Velocidad de lanzamiento del dardo");
-
-    /*carpeta.add(effectController, "giro_brazo_z", -45.0, 45.0, 1).name("Giro del brazo");
-    carpeta.add(effectController, "giro_antebrazo_y", -180.0, 180.0, 1).name("Giro del antebrazo en Y");
-    carpeta.add(effectController, "giro_antebrazo_z", -90.0, 90.0, 1).name("Giro del antebrazo en Z");
-    carpeta.add(effectController, "giro_pinza_z", -40.0, 220.0, 1).name("Giro de la pinza");
-    carpeta.add(effectController, "distancia_pinza_z", 0.0, 15.0, 1).name("Distancia de las pinzas entre sí");*/
-
+    carpeta.add(effectController, "dart_speed", 25, 40, 1).name("Velocidad del dardo");
 
     let sensorColor = carpeta.addColor(effectController, "dart_color").name("Color de los dardos");
     sensorColor.onChange(

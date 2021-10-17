@@ -1,17 +1,21 @@
 ## GPC
  Repository for Computer Vision Graphics from MIARFID at UPV
 
+<br><br>
 
-# Structure for the practice is:
- /practica1.html
- /practica2.html
- /practica3.html
- /practica4.html
+# Structure for the practice is: <br>
+ /practica1.html <br>
+ /practica2.html <br>
+ /practica3.html <br>
+ /practica4.html <br>
  /practica5.html
 
-# Final project:
+<br><br>
+
+# Final project: <br>
  /Final_project/project.html
 
+<br>
 
  In this project, I have to give credits to different sources:
 
