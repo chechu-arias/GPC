@@ -220,6 +220,35 @@ function createPilar(is_black) {
 
 }
 
+function create_outer_walls() {
+
+    let path = "images/outside/";
+
+    let outer_walls = [
+        path + "posx.jpg", path + "negx.jpg",
+        path + "posy.jpg", path + "negy.jpg",
+        path + "posz.jpg", path + "negz.jpg"
+    ];
+
+    let mapaEntorno = new THREE.CubeTextureLoader().load( outer_walls );
+
+    let shader = THREE.ShaderLib.cube;
+
+    shader.uniforms.tCube.value = mapaEntorno;
+
+    let outer_walls_material = new THREE.ShaderMaterial({
+
+        fragmentShader: shader.fragmentShader,
+        vertexShader: shader.vertexShader,
+        uniforms: shader.uniforms,
+        depthWrite: false,
+        side: THREE.BackSide
+
+    });
+
+    return new THREE.Mesh( new THREE.BoxGeometry(10000, 10000, 10000), outer_walls_material );
+}
+
 function load3DElement( path, scale_factor, posi_x, posi_y, posi_z ) {
 
     const loader = new THREE.GLTFLoader();

@@ -183,17 +183,7 @@ function setupGUI() {
 
 }
 
-function create_wall_with_mid_gap() {
-
-    let path_paredes = './images/wall/';
-
-    let material_paredes = new THREE.MeshStandardMaterial({
-        aoMap: new THREE.TextureLoader().load(path_paredes + 'ao.jpg'),
-        normalMap: new THREE.TextureLoader().load(path_paredes + 'norm.png'),
-        roughnessMap: new THREE.TextureLoader().load(path_paredes + 'rough.jpg'),
-        map: new THREE.TextureLoader().load(path_paredes + 'ao.jpg'),
-        lightMapIntensity: 0.1
-    });
+function create_wall_with_mid_gap( material_paredes ) {
 
     let parte_izquierda = new THREE.Mesh( new THREE.PlaneGeometry( 75, 200, 10, 10 ), material_paredes );
     parte_izquierda.position.set(-125, 0, 0);
@@ -253,18 +243,15 @@ function loadScene() {
     let pared_frontal = new THREE.Mesh( new THREE.PlaneGeometry( 400, 200, 10, 10 ), material_paredes );
     pared_frontal.position.set(0, 100, -200);
 
-    //let pared_izquierda = new THREE.Mesh( new THREE.PlaneGeometry( 400, 200, 10, 10 ), material_paredes );
-    let pared_izquierda = create_wall_with_mid_gap();
+    let pared_izquierda = create_wall_with_mid_gap( material_paredes );
     pared_izquierda.position.set(-200, 100, 0);
     pared_izquierda.rotation.y = Math.PI/2;
 
-    //let pared_derecha = new THREE.Mesh( new THREE.PlaneGeometry( 400, 200, 10, 10 ), material_paredes );
-    let pared_derecha = create_wall_with_mid_gap();
+    let pared_derecha = create_wall_with_mid_gap( material_paredes );
     pared_derecha.position.set(200, 100, 0);
     pared_derecha.rotation.y = -Math.PI/2;
 
-    //let pared_trasera = new THREE.Mesh( new THREE.PlaneGeometry( 400, 200, 10, 10 ), material_paredes );
-    let pared_trasera = create_wall_with_mid_gap();
+    let pared_trasera = create_wall_with_mid_gap( material_paredes );
     pared_trasera.position.set(0, 100, 200);
     pared_trasera.rotation.y = Math.PI;
 
@@ -279,28 +266,8 @@ function loadScene() {
     scene.add(pared_trasera);
     scene.add(techo);
 
-    let path = "images/outside/";
-    let walls = [
-        path + "posx.jpg", path + "negx.jpg",
-        path + "posy.jpg", path + "negy.jpg",
-        path + "posz.jpg", path + "negz.jpg"
-    ];
-    let mapaEntorno = new THREE.CubeTextureLoader().load( walls );
-    let shader = THREE.ShaderLib.cube;
-    shader.uniforms.tCube.value = mapaEntorno;
-    let wallsMaterial = new THREE.ShaderMaterial({
-
-        fragmentShader: shader.fragmentShader,
-        vertexShader: shader.vertexShader,
-        uniforms: shader.uniforms,
-        depthWrite: false,
-        side: THREE.BackSide
-
-    });
-    let habitacion = new THREE.Mesh( new THREE.BoxGeometry(10000, 10000, 10000), wallsMaterial );
-    scene.add(habitacion);
-
-
+    let outer_walls = create_outer_walls();
+    scene.add(outer_walls);
 
     diana = createDartboard();
     diana.position.set(-100, 60, -199);
