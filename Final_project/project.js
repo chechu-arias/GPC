@@ -114,7 +114,7 @@ function init() {
 
     // Ilumination
 
-    let luzAmbiente = new THREE.AmbientLight( 0xffffff, 0.4 );
+    let luzAmbiente = new THREE.AmbientLight( 0xffffff, 0.7 );
     scene.add(luzAmbiente);
 
     dartboard_light = new THREE.SpotLight( 0xffffff, 0.7 );
@@ -136,8 +136,6 @@ function init() {
     pooltable_light.shadow.camera.far = 200;
     scene.add(pooltable_light.target);
     scene.add(pooltable_light);
-
-    scene.add(THREE.AxisHelper(100));
 
 }
 

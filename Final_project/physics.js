@@ -1,4 +1,4 @@
-let const_time_acceleration = 2.25;
+let const_time_acceleration = 5;
 let throwing_speed = 25;
 
 function getDartY(velocity, height, angle, x) {
