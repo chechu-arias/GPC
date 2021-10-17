@@ -1,3 +1,4 @@
+let const_time_acceleration = 2.25;
 let throwing_speed = 25;
 
 function getDartY(velocity, height, angle, x) {
@@ -36,14 +37,13 @@ function throwDart(angle, dart) {
                   dart_in_the_ceiling = true;
                   break;
             }
-            console.log(new_y);
             dart_position_x.push(starting_x);
             dart_position_y.push(new_y);
             dart_position_z.push(actual_z);
             actual_z -= 1;
       }
 
-      let t_animation = Math.abs(actual_z - starting_z)/(velocity*2) * 1000;
+      let t_animation = Math.abs(actual_z - starting_z)/(velocity*const_time_acceleration) * 1000;
 
       let tween_mov = new TWEEN.Tween( dart.position )
                   .to( {x: dart_position_x,
@@ -57,8 +57,8 @@ function throwDart(angle, dart) {
 
       if ( dart_in_the_ceiling ) {
 
-            let t_to_ground = Math.sqrt( 2*end_point_y/9.8 ) * 1000 / 2;
-            //console.log(end_point_x, 0, final_z);
+            let t_to_ground = Math.sqrt( 2*end_point_y/9.8 ) * 1000 / const_time_acceleration;
+
             let tween_mov_to_ground = new TWEEN.Tween( dart.position )
                   .to( {x: [end_point_x, end_point_x],
                         y: [end_point_y/2, 0],
@@ -69,10 +69,10 @@ function throwDart(angle, dart) {
 
       }
       else if ( dartNotInsideDartboard(end_point_x, end_point_y) && !dart_in_ground ) {
-            //console.log("X");
+
             let t_to_ground = Math.sqrt( 2*end_point_y/9.8 ) * 1000;
             let final_z = end_point_y/3;
-            //console.log(end_point_x, 0, final_z);
+
             let tween_mov_to_ground = new TWEEN.Tween( dart.position )
                   .to( {x: [end_point_x, end_point_x],
                         y: [end_point_y/2, 0],
@@ -81,7 +81,7 @@ function throwDart(angle, dart) {
 
             tween_mov.chain(tween_mov_to_ground);
       }
-      // Exponential.Out t*1.5
+
       tween_mov.start();
 
 }

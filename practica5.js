@@ -142,7 +142,7 @@ function setupGUI() {
 }
 
 
-let path = "../webgl/images/";
+let path = "webgl/images/";
 
 function loadRoom() {
 
