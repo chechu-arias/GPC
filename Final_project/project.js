@@ -150,7 +150,7 @@ function setupGUI() {
     };
 
     let gui = new dat.GUI( { width: 350 } );
-    let carpeta = gui.addFolder("Control del Robot");
+    let carpeta = gui.addFolder("Control del proyecto");
 
     carpeta.add(effectController, "player_speed", 0.2, 4.0, 0.1).name("Velocidad del movimiento");
     carpeta.add(effectController, "dart_speed", 25, 40, 1).name("Velocidad del dardo");
