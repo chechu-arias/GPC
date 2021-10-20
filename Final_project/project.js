@@ -146,6 +146,9 @@ function setupGUI() {
         mensaje: 'Interfaz del Robot',
         player_speed: movement_speed,
         dart_speed: throwing_speed,
+        game_instructions: function() {
+            alert("Para lanzar un dardo puedes pulsar la tecla E de tu teclado.\n ¡Disfruta del juego!");
+        },
         dart_color: "rgb(255, 0, 0)"
     };
 
@@ -154,6 +157,7 @@ function setupGUI() {
 
     carpeta.add(effectController, "player_speed", 0.2, 4.0, 0.1).name("Velocidad del movimiento");
     carpeta.add(effectController, "dart_speed", 25, 40, 1).name("Velocidad del dardo");
+    carpeta.add(effectController, "game_instructions").name("Instrucciones del juego");
 
     let sensorColor = carpeta.addColor(effectController, "dart_color").name("Color de los dardos");
     sensorColor.onChange(
